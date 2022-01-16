@@ -29,7 +29,7 @@ Execute the following command: ```poetry install --dev```
 
 ### Run FastAPI app and Celery worker app
 
-1. Start the FastAPI web application with ```poetry run hypercorn app/main:app --reload```.
+1. Start the FastAPI web application with ```poetry run hypercorn app/main:app -b 127.0.0.1:5000 --reload```.
 2. Start the celery worker with command ```poetry run celery -A app.worker.celery_worker worker -l info -Q test-queue -c 1```
-3. Navigate to the [http://localhost:8000/docs](http://localhost:8000/docs) and execute test API call. You can monitor the execution of the celery tasks in the console logs or navigate to the flower monitoring app at [http://localhost:5555](http://localhost:5555) (username: user, password: test).
+3. Navigate to the [http://localhost:5000/docs](http://localhost:8000/docs) and execute test API call. You can monitor the execution of the celery tasks in the console logs or navigate to the flower monitoring app at [http://localhost:5555](http://localhost:5555) (username: user, password: test).
 4. Start the flower for monitoring mq ```celery flower -A celery_worker.celery --broker:amqp://localhost//```

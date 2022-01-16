@@ -31,7 +31,6 @@ async def root(word: str, background_task: BackgroundTasks):
         task_name = "app.worker.celery_worker.test_celery"
 
     task = celery_app.send_task(task_name, args=[word])
-    print(task)
     background_task.add_task(background_on_message, task)
 
     return {"process_id": task.id}
