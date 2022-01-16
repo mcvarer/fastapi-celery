@@ -34,7 +34,7 @@ async def root(word: str, background_task: BackgroundTasks):
     print(task)
     background_task.add_task(background_on_message, task)
 
-    return {"message": "Word received"}
+    return {"process_id": task.id}
 
 @app.get("/process/{task_id}")
 async def get_task_result(task_id: str) -> JSONResponse:
